@@ -1,4 +1,4 @@
-# AI Stats Lab — Chapter 3
+# AI Stats Lab
 
 Topics:
 
