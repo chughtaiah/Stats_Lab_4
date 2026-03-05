@@ -1,88 +1,109 @@
-# Prob and Stats Lab – Discrete Probability Distributions
+# AI Stats Lab — Chapter 3
 
-Follow the instructions in each function carefully.
-DO NOT change function names.
-Use random_state=42 where required.
+Topics:
 
-IMPORTANT:
-Whenever absolute error is requested, compute:
+- Random variables
+- CDF probabilities
+- Valid PDFs
+- Exponential distribution
+- Gaussian distribution
+- Monte Carlo verification
+- PDF plotting
 
-    absolute_error = abs(empirical_value − theoretical_value)
+Allowed libraries:
 
---------------------------------------------------------
+- numpy
+- scipy
+- matplotlib
+- math
 
-QUESTION 1 – Card Experiment (Without Replacement)
+Do not change function names.
 
-Two cards are drawn WITHOUT replacement from a 52-card deck.
+---
 
-Let:
-A = first card is an Ace
-B = second card is an Ace
+# Setup
+
+```bash
+pip install numpy scipy matplotlib pytest
+```
+
+---
+
+# Run Autograder
+
+```bash
+pytest -q test_AIstats_lab.py
+```
+
+---
+
+# Question 1 — CDF Probabilities
+
+Given the CDF
+
+F_X(x) = (1 - e^{-x})u(x)
+
+Compute analytically:
+
+1. P(X > 5)
+2. P(X < 5)
+3. P(3 < X < 7)
+
+Then verify P(X>5) using Monte Carlo simulation.
+
+Return both analytical and simulated values.
+
+---
+
+# Question 2 — PDF Validation and Plot
+
+Consider the candidate PDF
+
+f(x) = 2x e^{-x²},  x ≥ 0
+
+Tasks:
+
+1. Verify non-negativity
+2. Compute integral from 0 to ∞
+3. Determine if the function is a valid PDF
+4. Plot the PDF on [0,3]
+
+Return:
+
+- integral value
+- validity (True/False)
+
+---
+
+# Question 3 — Exponential Distribution
+
+Let
+
+X ~ Exp(λ = 1)
 
 Compute:
-- P(A)
-- P(B)
-- P(B | A)
-- P(A ∩ B)
 
-Check independence:
-P(A ∩ B) ?= P(A)P(B)
+1. P(X > 5)
+2. P(1 < X < 3)
 
-Simulate 200,000 experiments and estimate:
-- empirical P(A)
-- empirical P(B | A)
+Then estimate both probabilities using Monte Carlo simulation.
 
-Compute absolute error between:
-- theoretical P(B | A)
-- empirical P(B | A)
+Return analytical and simulated results.
 
---------------------------------------------------------
+---
 
-QUESTION 2 – Bernoulli (Light Bulb)
+# Question 4 — Gaussian Distribution
 
-A light bulb is defective with probability p = 0.05.
+Let
 
-Compute:
-- Theoretical P(X = 1)
-- Theoretical P(X = 0)
-- Empirical P(X = 1)
-- Absolute error
+X ~ N(10, 2²)
 
---------------------------------------------------------
+Tasks:
 
-QUESTION 3 – Binomial (10 Bulbs)
+1. Standardize the variable
+2. Compute P(X ≤ 12)
+3. Compute P(8 < X < 12)
 
-Inspect 10 bulbs independently.
+Then simulate 100000 samples and estimate the probabilities.
 
-Compute:
-- Theoretical P(X = 0)
-- Theoretical P(X = 2)
-- Theoretical P(X ≥ 1)
-- Empirical P(X ≥ 1)
-- Absolute error
-
---------------------------------------------------------
-
-QUESTION 4 – Geometric (Die Until 6)
-
-Roll a fair die repeatedly until a 6 appears.
-
-Compute:
-- Theoretical P(X = 1)
-- Theoretical P(X = 3)
-- Theoretical P(X > 4)
-- Empirical P(X > 4)
-- Absolute error
-
---------------------------------------------------------
-
-QUESTION 5 – Poisson (Customers per Hour)
-
-Customers arrive at rate λ = 12 per hour.
-
-Compute:
-- Theoretical P(X = 0)
-- Theoretical P(X = 15)
-- Theoretical P(X ≥ 18)
-- Empirical P(X ≥ 18)
-- Absolute error
+Return analytical and simulated results.
