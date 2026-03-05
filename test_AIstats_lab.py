@@ -2,42 +2,37 @@ import AI_stats_lab as A
 import math
 
 
-def test_card_experiment():
-    P_A, P_B, P_B_given_A, P_AB, emp_A, emp_B_given_A, error = A.card_experiment()
+def test_cdf():
 
-    assert abs(P_A - 4/52) < 1e-12
-    assert abs(P_B_given_A - 3/51) < 1e-12
-    assert abs(emp_A - P_A) < 0.01
-    assert abs(emp_B_given_A - P_B_given_A) < 0.02
+    a1, a2, a3, sim = A.cdf_probabilities()
 
-
-def test_bernoulli_lightbulb():
-    theoretical, theoretical_zero, empirical, error = A.bernoulli_lightbulb()
-
-    assert abs(theoretical - 0.05) < 1e-12
-    assert abs(theoretical_zero - 0.95) < 1e-12
-    assert abs(empirical - theoretical) < 0.01
+    assert abs(a1 - math.exp(-5)) < 1e-6
+    assert abs(a2 - (1 - math.exp(-5))) < 1e-6
+    assert abs(a3 - (math.exp(-3) - math.exp(-7))) < 1e-6
+    assert abs(sim - a1) < 0.01
 
 
-def test_binomial_bulbs():
-    P0, P2, P_ge_1, emp_ge_1, error = A.binomial_bulbs()
+def test_pdf():
 
-    expected_P0 = (0.95)**10
-    assert abs(P0 - expected_P0) < 1e-12
-    assert abs(emp_ge_1 - P_ge_1) < 0.02
+    integral, valid = A.pdf_validation_plot()
 
-
-def test_geometric_die():
-    P1, P3, P_gt_4, emp_gt_4, error = A.geometric_die()
-
-    assert abs(P1 - (1/6)) < 1e-12
-    assert abs(P3 - ((5/6)**2)*(1/6)) < 1e-12
-    assert abs(emp_gt_4 - P_gt_4) < 0.02
+    assert abs(integral - 1) < 1e-3
+    assert valid is True
 
 
-def test_poisson_customers():
-    P0, P15, P_ge_18, emp_ge_18, error = A.poisson_customers()
+def test_exponential():
 
-    expected_P0 = math.exp(-12)
-    assert abs(P0 - expected_P0) < 1e-12
-    assert abs(emp_ge_18 - P_ge_18) < 0.02
+    a1, a2, s1, s2 = A.exponential_probabilities()
+
+    assert abs(a1 - math.exp(-5)) < 1e-6
+    assert abs(a2 - (math.exp(-1) - math.exp(-3))) < 1e-6
+    assert abs(s1 - a1) < 0.02
+
+
+def test_gaussian():
+
+    a1, a2, s1, s2 = A.gaussian_probabilities()
+
+    assert 0 <= a1 <= 1
+    assert 0 <= a2 <= 1
+    assert abs(s1 - a1) < 0.02
